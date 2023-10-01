@@ -4,8 +4,6 @@ import React from 'react';
 function Darktoggle(props) {
   let colorRange = props.colorRange
  
-
-  
   return (
     <Container>
       <p style={{color: colorRange.primaryFont}}>Darkmode:</p>

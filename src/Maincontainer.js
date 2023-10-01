@@ -3,10 +3,11 @@ import Body from "./Body";
 import React, { useEffect, useState } from 'react';
 
 function MainContainer() {
+    let startDef;
     const[darkToggle, setDarkToggle] = useState(false)
     const[colorRange, setColorRange] = useState({secondaryBackground: '#D1E8E2', primaryFont: '#19747E'})
-    const[searchTerm, setSearchTerm] = useState('checking')
-    const[dictData, setDictData] = useState('')
+    const[searchTerm, setSearchTerm] = useState('help')
+    const[dictData, setDictData] = useState(false)
     function toggleState(){
         setDarkToggle(!darkToggle)
     }
@@ -19,17 +20,29 @@ function MainContainer() {
         }
     }, [darkToggle])
 
+    //inital API load
+    useEffect(() => {
+        console.log('hi')
+        fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`)
+            .then(res => res.json())
+            .then(data =>{
+                if(data.title){
+                    setDictData(false)
+                } else {
+                    setDictData(data[0])
+                }
+            })
+    }, [])
+
     function searchDict() {
         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`)
             .then(res => res.json())
             .then(data =>{
                 setDictData(data[0])
             })
+
     }
 
-    useEffect(() => {
-        console.log(dictData.meanings[0]['partOfSpeech'])
-    }, [dictData])
     
       return (
         <>
