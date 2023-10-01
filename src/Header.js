@@ -11,7 +11,7 @@ function Header(props) {
             {/* top header (icon, font selector, nightmode selector) */}
             <TopHeader toggleState={props.toggleState} colorRange={props.colorRange} darkToggle={props.darkToggle} fontSelect={props.fontSelect}/>
             {/* bottom header (search function) */}
-            <Searchbar searchInput={props.searchInput} searchTerm={props.searchTerm}/>
+            <Searchbar searchInput={props.searchInput} searchTerm={props.searchTerm} />
             </Container>
     </>
   );

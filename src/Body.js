@@ -25,37 +25,62 @@ function Body(props) {
     )} else {
   return (
                 
-        <Container style={{fontFamily: props.font}} onClick={props.searchDict}>
+        <Container style={{fontFamily: props.font}}>
 
-        <FieldContainer>
+        <div className='wordDisplay'>
         <h1>{dictData.word}</h1>
-        </FieldContainer>
+        <p className='italics'>{dictData.phonetic}</p>
+        </div>
 
-
-        <FieldContainer>
-        <span>Phonetic:</span><p className='italics'>{dictData.phonetic}</p>
-        </FieldContainer>
-        {/* map =< 3 meanings */}
-
-
-        {defArr.map((i) => { return (
-          <div style={{border: 'grey 1px solid', marginBottom: '1%', padding: '1%'}} >
-        <FieldContainer>
-        <span>Part of Speech:</span><p>{dictData.meanings[0]['partOfSpeech']}</p>
-        </FieldContainer>
-
-        <FieldContainer>
-        <span>Definition:</span><p>{dictData.meanings[0]['definitions'][i]['definition']}</p>
-        </FieldContainer>
-
-        <FieldContainer>
-        <span>Example of Use:</span><p>{dictData.meanings[0]['definitions'][i]['example']}</p>
-        </FieldContainer>
-          </div>
-        )
+        {dictData.meanings.map((item, j) => {          
+          return (
+            <div>
+              <div className='lineBreak'></div>
+          <FieldContainer>
+          <span>Part of Speech:</span><p>{dictData.meanings[j]['partOfSpeech']}</p>
+          </FieldContainer>
+  
+          <FieldContainer className='definitionRow'>
+          <span>Definition:</span> 
+          <div className='definitionContainer'>
+          {dictData.meanings[j]['definitions'].map((item, i) => {
+            if(i < 3){
+            return(
+              <p>&#x2022; {item['definition']}</p>
+            )
+            }
+          })}  
+          </div>             
+          </FieldContainer>
+        
+            </div>
+          )
         })}
-      
 
+             {/* <p>{dictData.meanings[jindex]['definitions'][0]['definition'] ? dictData.meanings[jindex]['definitions'][0]['definition'] : null}</p>
+            <p>{dictData.meanings[jindex]['definitions'][1]['definition'] ? dictData.meanings[jindex]['definitions'][1]['definition'] : null}</p>
+            <p>{dictData.meanings[jindex]['definitions'][2]['definition'] ? dictData.meanings[jindex]['definitions'][2]['definition'] : null}</p> */}
+
+{/* {dictData.meanings.map((item, jindex) => {
+          
+          return(          
+            dictData.meanings[jindex]['definitions'].map((item, i) => {return (
+              <div>
+                <div></div>
+            <FieldContainer>
+            <span>Part of Speech:</span><p>{dictData.meanings[jindex]['partOfSpeech']}</p>
+            </FieldContainer>
+    
+            <FieldContainer>
+            <span>Definition:</span><p>{dictData.meanings[jindex]['definitions'][i]['definition']}</p>
+            </FieldContainer>
+          
+              </div>
+            )
+            })
+          )
+        })} */}
+     
         </Container>
     
   );
@@ -67,20 +92,42 @@ function Body(props) {
 export default Body;
 
 const Container = styled.div`
-
+margin-left: 5%;
+.lineBreak{
+  border-top: 2px solid black;
+  height: 2px;
+  width: 80%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+.wordDisplay{
+  display: flex;
+  flex-direction: column;
+}
 `
 
 const FieldContainer = styled.div`
 display: flex;
-align-items: center;
+flex-direction: column;
+align-items: flex-start;
+h1{
+  
+}
 p{
-  padding-left: 5%;
+  margin-top: 0%;
 }
 span{
   font-weight: bold;
+  width: 15%;
+  margin-top: 0%;
 }
 .italics{
   font-style: italic;
+}
+
+.definitionContainer{
+  display: flex;
+  flex-direction: column;
 }
 
 `
