@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 function MainContainer() {
     const[darkToggle, setDarkToggle] = useState(false)
-    const[colorRange, setColorRange] = useState({secondaryBackground: '#D1E8E2', primaryFont: '#19747E'})
+    const[colorRange, setColorRange] = useState('')
     const[searchTerm, setSearchTerm] = useState('help')
     const[dictData, setDictData] = useState(false)
     const[font, setFont] = useState('Open Sans')
@@ -31,9 +31,9 @@ function MainContainer() {
     //below effect changes the colour mapping object based upon the change of dark toggle
     useEffect(() => {
         if(darkToggle){
-            setColorRange({secondaryBackground: 'grey', primaryFont: 'black'})
+            setColorRange({secondaryBackground: 'grey', background:'#3F2E3E', primaryFont: '#EFE1D1'})
         } else {
-            setColorRange({secondaryBackground: '#D1E8E2', primaryFont: '#19747E'})
+            setColorRange({secondaryBackground: '#B9B4C7', background:'#EFE1D1', primaryFont: '#19747E'})
         }
     }, [darkToggle])
 
@@ -64,14 +64,12 @@ function MainContainer() {
     
     
       return (
-        <>
-            <p>
+        <div style={{fontFamily: font, color: colorRange.primaryFont, background: colorRange.background, height: '100vh'}}>
              {/* container for nav and search (header) */}
              <Header toggleState={toggleState} darkToggle={darkToggle} colorRange={colorRange} searchInput={searchInput} font={font} fontSelect={fontSelect}/>         
              {/* container for definitions (body) */}
-             <Body dictData={dictData} searchTerm={searchTerm} font={font}/>  
-            </p>
-        </>
+             <Body dictData={dictData} searchTerm={searchTerm} font={font} colorRange={colorRange}/>  
+        </div>
       );
     }
     

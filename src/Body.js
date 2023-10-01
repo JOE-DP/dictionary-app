@@ -19,13 +19,13 @@ function Body(props) {
 }
   if(dictData == false){
     return (
-      <Container style={{fontFamily: props.font}}> 
+      <Container style={{fontFamily: props.font, color: props.colorRange.primaryFont}}> 
       <p>Search not found, please try to search again in the search bar above</p>
       </Container>
     )} else {
   return (
                 
-        <Container style={{fontFamily: props.font}}>
+        <Container style={{fontFamily: props.font, color: props.colorRange.primaryFont, background: props.colorRange.background}}>
 
         <div className='wordDisplay'>
         <h1>{dictData.word}</h1>
@@ -92,7 +92,7 @@ function Body(props) {
 export default Body;
 
 const Container = styled.div`
-margin-left: 5%;
+padding-left: 5%;
 .lineBreak{
   border-top: 2px solid black;
   height: 2px;

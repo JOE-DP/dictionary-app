@@ -7,12 +7,12 @@ function TopHeader(props) {
   return (
     <Container>
         {/* icon */}
-        <div>
-            icon
-        </div>
+        
 
         {/* font selector */}
-        <div>
+        
+        <div className='fontContainer'>
+            <p>| Font Select | </p>
         <p style={{fontFamily: 'Open Sans'}} onClick={props.fontSelect}>Open Sans</p>
             {/* font-family: 'Open Sans', sans-serif; */}
         <p style={{fontFamily: 'Raleway'}} onClick={props.fontSelect}>Raleway</p>
@@ -29,6 +29,32 @@ function TopHeader(props) {
 const Container = styled.div`
 display: flex;
 justify-content: space-evenly;
+align-items: center;
+@media only screen and (max-width: 700px) {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+.fontContainer{
+    margin: 1%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 10%;
+    border-radius: 30px;
+    
+    @media only screen and (max-width: 700px) {
+        justify-content: flex-start;
+       width: 80%;
+       font-size: 0.8em;          
+       
+      }
+    p{
+        padding-right: 2%;
+        cursor: pointer;
+    }
+}
 
 `
 
