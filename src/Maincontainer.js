@@ -11,7 +11,19 @@ function MainContainer() {
     function toggleState(){
         setDarkToggle(!darkToggle)
     }
+
+    //function to handle the search input
+    function searchInput(e){
+        let searchValue = e.target.value
+        if(searchValue == ''){
+            searchValue = "-"
+        }
+        setSearchTerm(searchValue)
+    }
+
+
     // soft mint green #D1E8E2, deep teal #19747E, light sky blue #A9D6E5, light gray #E2E2E2 - lightmode (default)
+    //below effect changes the colour mapping object based upon the change of dark toggle
     useEffect(() => {
         if(darkToggle){
             setColorRange({secondaryBackground: 'grey', primaryFont: 'black'})
@@ -34,23 +46,35 @@ function MainContainer() {
             })
     }, [])
 
-    function searchDict() {
+    useEffect(() => {
         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`)
-            .then(res => res.json())
-            .then(data =>{
+        .then(res => res.json())
+        .then(data =>{
+            if(data.title){
+                setDictData(false)
+            } else {
                 setDictData(data[0])
-            })
-
-    }
+            }
+        })
+        console.log(dictData)
+    }, [searchTerm])
+    
+    // function searchDict() {
+    //     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`)
+    //         .then(res => res.json())
+    //         .then(data =>{
+    //             setDictData(data[0])
+    //         })
+    // }
 
     
       return (
         <>
             <p>
              {/* container for nav and search (header) */}
-             <Header toggleState={toggleState} darkToggle={darkToggle} colorRange={colorRange}/>         
+             <Header toggleState={toggleState} darkToggle={darkToggle} colorRange={colorRange} searchInput={searchInput}/>         
              {/* container for definitions (body) */}
-             <Body dictData={dictData} searchDict={searchDict}/>  
+             <Body dictData={dictData} searchTerm={searchTerm}/>  
             </p>
         </>
       );

@@ -7,10 +7,8 @@ import React from 'react';
 function Body(props) {
   let dictData = props.dictData
   let defArr = []
-  console.log(dictData)
-  if(props.dictData){
-  console.log(dictData)
-  // processing the definitions loop and display
+   if(props.dictData){
+    // processing the definitions loop and display
   let loopLen = 0
   let defLen = dictData.meanings[0]['definitions'].length
   defLen > 3 ? loopLen = 3 : loopLen = defLen
@@ -34,9 +32,11 @@ function Body(props) {
         <span>Phonetic:</span><p>{dictData.phonetic}</p>
         </FieldContainer>
         {/* map =< 3 meanings */}
+
+
         {defArr.map((i) => { return (
           <>
-           <FieldContainer>
+        <FieldContainer>
         <span>Part of Speech:</span><p>{dictData.meanings[0]['partOfSpeech']}</p>
         </FieldContainer>
 
