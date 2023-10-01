@@ -10,10 +10,17 @@ function TopHeader(props) {
         <div>
             icon
         </div>
+
         {/* font selector */}
         <div>
-            font selector/dropdown
+        <p style={{fontFamily: 'Open Sans'}} onClick={props.fontSelect}>Open Sans</p>
+            {/* font-family: 'Open Sans', sans-serif; */}
+        <p style={{fontFamily: 'Raleway'}} onClick={props.fontSelect}>Raleway</p>
+            {/* font-family: 'Raleway', sans-serif; */}
+        <p style={{fontFamily: 'Ubuntu'}} onClick={props.fontSelect}>Ubuntu</p>
+            {/* font-family: 'Ubuntu', sans-serif; */}
         </div>
+
         {/* darkmode selector */}   
         <Darktoggle toggleState={props.toggleState} colorRange={props.colorRange} darkToggle={props.darkToggle}/>  
     </Container>
